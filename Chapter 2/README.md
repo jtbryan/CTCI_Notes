@@ -21,3 +21,20 @@
     * An example approach may be to discuss your passions or interest regardng Visual Studio and why you like it 
 
 ## Amazon Interview
+
+* Candidates interview with a specific team
+    * A candidate may have 2 or more interviews, which indicate either that one of the interviewers wasn't convinced or they are being considered for a different team or profile.
+
+* Candidates typically write code with a shared code editor.
+
+* Bar raisers interviewers are selected to interview candidates outside of their group in order to balance the group. This interview may seem significantly more difficult. 
+    * Remember, your performance is judged relative to other candidates, not some arbitrary "percent correct" grading. 
+
+* Folllow-up with recruiters within a week
+
+* Prepare for system design questions and Scalability
+
+* Try your best to impress the hiring manager and the bar raiser
+
+## Google Interview
+
