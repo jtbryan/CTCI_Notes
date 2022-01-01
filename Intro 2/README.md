@@ -8,7 +8,7 @@
 
 * **Befriend your recruiter**, they can be an essential asset in getting you through the process or even advocating for you if you performed poorly
 
-## Microsoft Interview
+### Microsoft Interview
 
 * Microsoft wants smart people, and while you won't be tested on C++ API's, expect to write code.
 
@@ -20,7 +20,7 @@
     * This is an important question as it shows your passions for technology as well as your interest in Microsoft products
     * An example approach may be to discuss your passions or interest regardng Visual Studio and why you like it 
 
-## Amazon Interview
+### Amazon Interview
 
 * Candidates interview with a specific team
     * A candidate may have 2 or more interviews, which indicate either that one of the interviewers wasn't convinced or they are being considered for a different team or profile.
@@ -36,5 +36,28 @@
 
 * Try your best to impress the hiring manager and the bar raiser
 
-## Google Interview
+### Google Interview
 
+
+
+## Interview Preparation Grid
+
+| Common Questions | Project/job/activity 1 | Project/job/activity 2 |
+| ---- | --- | ---- |
+| Challenges | N/A | N/A |
+| Mistakes/Failures | N/A | N/A |
+| Enjoyed | N/A | N/A |
+| Leadership | N/A | N/A |
+| Conflicts | N/A | N/A |
+| What you'd do differently | N/A | N/A |
+
+## S.A.R Story Grid
+
+* **S.A.R** - Story. Action Result
+* **Nugget** - Succicntly describes what the response will be about
+
+|  | Nugget | Situation | Action(s) | Result | What It Says |
+| ---- | --- | ---- | ---- | ---- | ---- |
+| Story 1 | N/A | N/A | N/A | N/A | N/A |
+| Story 2 | N/A | N/A | N/A | N/A | N/A |
+| Story 3 | N/A | N/A | N/A | N/A | N/A |
