@@ -10,3 +10,9 @@
         * **Merge K Sorted Pattern**
         * **Two Heaps Pattern**
         * **Minimum Number Pattern**
+
+* **Dyanmic Pattern**
+    * Usually involves calculating something multiple times to find something
+    * Usually uses **recursion**
+        * **Tabulation** is bottom-up
+        * **Memoization** is top-down
