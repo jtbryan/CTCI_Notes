@@ -1,0 +1,50 @@
+# Data Structure Notes
+
+## Arrays/Strings
+
+## Linked Lists
+
+## Stacks & Queues
+
+## Trees & Graps
+
+## Maps/Dictionaries
+
+### Time Complexity
+
+* **Insert**
+    * Average: **O(1)**
+    * Worst: **O(n)**
+
+* **Get**
+    * Average: **O(1)**
+    * Worst: **O(n)**
+
+* **Delete**
+    * Average: **O(1)**
+    * Worst: **O(n)**
+### Example
+
+```python
+mapping = dict()
+
+# Update/Set 
+mapping["key"] = mapping.get("key", 0) + 1
+
+# Loop
+for key in mapping:
+    mapping[key] = ?
+
+# Delete
+mapping.pop('key', None)
+
+# OR
+
+del mapping['key'] # if it definitely exists
+
+# Creating a dynamic map
+numbers = (1, 2, 3, 4)
+mapping = map(lambda x: x + x, numbers)
+```
+## Heaps
+
