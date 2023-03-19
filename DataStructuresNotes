@@ -6,7 +6,49 @@
 
 ## Stacks & Queues
 
-## Trees & Graps
+## Trees
+
+## Graphs
+
+A graph data structure **(V, E)** consists of the following:
+* Vertices **(V)**: A collection of nodes or vertices
+* Edges **(E)**: A collection of paths or edges
+
+Fundamental algorithms for graphs include the following:
+
+### **BFS**
+This is a graph traversal algorithm that traverses the graph from the nearest node (root node) and explores all unexplored (neighboring) nodes by level. You can consider any node in the graph as a root node when using BFS for traversal
+
+Every vertex of a graph is put into the following categories:
+* Visited
+* Non-visited
+
+This specific algorithm uses the **Queue** data structure to find the shortest path in a given graph. 
+
+Below is an example of how BFS is performed:
+
+```python
+def bfs(graph, root):
+    visited = set()
+    # If not off limits, we could use collections.deque instead which is faster
+    queue = []
+
+    visited.add(root)
+    queue.append(root)
+
+    while queue:
+        # If this was deqeue, we would use popLeft()
+        vertex = queue.pop()
+
+        # Perform opetation at this node
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                queue.append(neighbor)
+
+graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+```
 
 ## Maps/Dictionaries
 
