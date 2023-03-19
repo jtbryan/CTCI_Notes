@@ -50,6 +50,28 @@ def bfs(graph, root):
 graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
 ```
 
+### **DFS**
+The depth-first search algorithm starts the traversal from the initial node of a given graph and goes deeper until we find the target node or the leaf node (with no children). DFS then backtracks from the leaf node towards the most recent node to explore it.
+
+This specific algorithm uses the **Stack** data structure to find the shortest path in a given graph. 
+
+Below is an example of how BFS is performed:
+
+```python
+def dfs(graph, node, visited=None):
+    if visited = None:
+        visited = set()
+    if node not in visited:
+        # do stuff
+        visited.add(node)
+        for neighbor in graph[node]:
+            dfs(graph, neighbor, visited)
+    
+    for neighbor in graph[start] -
+
+graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+```
+
 ## Maps/Dictionaries
 
 ### Time Complexity
