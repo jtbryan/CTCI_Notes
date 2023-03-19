@@ -38,7 +38,8 @@ def bfs(graph, root):
 
     while queue:
         # If this was deqeue, we would use popLeft()
-        vertex = queue.pop()
+        # a list popping the first is O(n) whereas deque is O(1)
+        vertex = queue.pop(0)
 
         # Perform opetation at this node
 
@@ -48,6 +49,7 @@ def bfs(graph, root):
                 queue.append(neighbor)
 
 graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+bfs(graph, 0)
 ```
 
 ### **DFS**
@@ -55,10 +57,10 @@ The depth-first search algorithm starts the traversal from the initial node of a
 
 This specific algorithm uses the **Stack** data structure to find the shortest path in a given graph. 
 
-Below is an example of how BFS is performed:
+Below is an example of how DFS is performed recursively:
 
 ```python
-def dfs(graph, node, visited=None):
+def recursiveDfs(graph, node, visited=None):
     if visited = None:
         visited = set()
     if node not in visited:
@@ -66,10 +68,32 @@ def dfs(graph, node, visited=None):
         visited.add(node)
         for neighbor in graph[node]:
             dfs(graph, neighbor, visited)
-    
-    for neighbor in graph[start] -
 
 graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+dfs(graph, 0)
+```
+
+And this is how it can be perfroemd iteratively (essentially similar to bfs but instead we use the stack):
+
+```python
+def iterativeDfs(graph, node, visited=None):
+    if visited = None:
+        visited = set()
+    stack = []
+
+    visited.add(root)
+    stack.append(root)
+
+    while stack:
+        vertex = stack.pop()
+
+        for neighbor in graph[vertex]:
+            if neighbor not in visited:
+                visited.add(neighbor)
+                stack.append(neighbor)
+
+graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
+dfs(graph, 0)
 ```
 
 ## Maps/Dictionaries
