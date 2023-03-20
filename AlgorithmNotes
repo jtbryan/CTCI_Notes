@@ -7,3 +7,48 @@
 ## Recursion & Dynamic Programming
 
 ## Sorting & Searching
+
+### Binary Search
+
+Very common search algorithm. This is used for sorted arrays to find an algorithm in `O(log n)` with `O(1)` space complexity. Here's an example of binary search in Python
+
+```python
+    def binary_search(nums, target):
+    left, right = 0, len(nums) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if nums[mid] == target:
+            return mid
+        elif nums[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+            
+    return -1
+```
+
+This can be customized any variety of ways. For example, one customization could be finding a minimum value in a rotated sorted array. This can be seen below:
+
+```python
+if len(nums) == 0:
+            return -1
+        elif len(nums) == 1:
+            return nums[0]
+
+        left, right = 0, len(nums) - 1
+        
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid+1] < nums[mid]:
+                return nums[mid+1]
+            elif nums[mid] < nums[mid-1]:
+                return nums[mid]
+            else:
+                if nums[right] > nums[mid]:
+                    right = mid - 1 
+                else:
+                    left = mid + 1
+                
+        return -1
+```

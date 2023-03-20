@@ -8,6 +8,95 @@
 
 ## Trees
 
+A tree is a special kind of graph data structure that has a `root` node and a `left` and `right` node. I.e.:
+
+```python
+class TreeNode:
+    self.val = None
+    self.right = None
+    self.left = None
+```
+
+Here are a few ways to traverse trees:
+
+* **Inorder** traversal
+```python
+...
+go_left(root.left)
+process_current_root()
+go_right(root.right)
+...
+```
+* **Preorder** traversal
+```python
+...
+process_current_root()
+go_left(root.left)
+go_right(root.right)
+...
+```
+* **Postorder** traversal
+```python
+...
+go_left(root.left)
+go_right(root.right)
+process_current_root()
+...
+```
+* **Level-order** traversal
+```python
+...
+node = queue.pop(0)
+process_current_root(node)
+go_left(root.left)
+go_right(root.right)
+...
+```
+    
+This method is very similar to Preorder traversal, but in this case, if we want to achieve an iterative approach, we can use a queue similar to `BFS`. Instead of graph neighbors, we only care about `node.left` and `node.right` though if they are valid. In this case, we don't need a `visited` set though because we know the binary tree is directed. An example of this can be seen here:
+
+```python
+def iterativeLevelOrder(root: TreeNode) -> List[List[int]]:
+    if not root:
+        return []
+    
+    queue = [root]
+    result = []
+    
+    while queue:
+        level_size = len(queue)
+        level_vals = []
+        for i in range(level_size):
+            node = queue.pop(0)
+            level_vals.append(node.val)
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+                
+        result.append(level_vals)
+        
+    return result
+```
+
+a recursive version of this would be the following:
+
+```python
+def recursiveLevelOrder(root: TreeNode) -> List[List[int]]:
+    result = []
+    def helper(node: TreeNode, level: int):
+        if not node:
+            return
+        if len(result) == level:
+            result.append([])
+        result[level].append(node.val)
+        helper(node.left, level+1)
+        helper(node.right, level+1)
+    
+    helper(root, 0)
+    return result
+```
+
 ## Graphs
 
 A graph data structure **(V, E)** consists of the following:
@@ -37,7 +126,7 @@ def bfs(graph, root):
     queue.append(root)
 
     while queue:
-        # If this was deqeue, we would use popLeft()
+        # If this was deqeue, we would use popleft()
         # a list popping the first is O(n) whereas deque is O(1)
         vertex = queue.pop(0)
 
@@ -94,6 +183,50 @@ def iterativeDfs(graph, node, visited=None):
 
 graph = {0: [1, 2], 1: [2], 2: [3], 3: [1, 2]}
 dfs(graph, 0)
+```
+
+### Example problem using DFS
+
+Source: https://leetcode.com/problems/number-of-islands/
+
+Prompt: Given an m x n 2D binary grid which represents a map of '1's (land) and '0's (water), return the number of islands.
+
+An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
+
+```python
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+
+        rows = len(grid)
+        cols = len(grid[0])
+
+        if rows == 0 or cols == 0:
+            return 0
+        
+        def dfs(curRow, curCol):
+            if curRow < 0 or curRow == rows or curCol < 0 or curCol == cols:
+                return
+
+            if grid[curRow][curCol] == "1":
+                grid[curRow][curCol] = "V"
+            
+            else:
+                return
+
+            dfs(curRow-1, curCol)
+            dfs(curRow+1, curCol)
+            dfs(curRow, curCol-1)
+            dfs(curRow, curCol+1)
+
+        count = 0
+
+        for row in range(rows):
+            for col in range(cols):
+                if grid[row][col] == "1":
+                    count += 1
+                    dfs(row, col)
+
+        return count
 ```
 
 ## Maps/Dictionaries
