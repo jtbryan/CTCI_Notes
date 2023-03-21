@@ -1,10 +1,34 @@
 # Data Structure Notes
 
-## Arrays/Strings
+<a href=#arrays-and-strings>Arrays & Strings</a>
+
+<a href=#linked-lists>Linked-Lists</a>
+
+<a href=#stacks-and-queues>Stacks and queues</a>
+
+<a href=#trees>Trees</a>
+
+<a href=#graphs>Graphs</a>
+
+<a href=#heaps>Heaps</a>
+
+## Arrays and Strings
+
+An example of how we can add 1 to an integer array (i.e. [1, 2, 3]) in python with `O(1)` space and `O(n)` time:
+
+```python
+def plusOne(self, digits: List[int]) -> List[int]:
+
+    added = int(''.join([str(i) for i in digits]))+1
+
+    return [int(i) for i in [*str(added)]]
+```
+
+`[*str(added)]`: unpacks the string and puts it into an array 
 
 ## Linked Lists
 
-## Stacks & Queues
+## Stacks and Queues
 
 ## Trees
 
@@ -96,6 +120,57 @@ def recursiveLevelOrder(root: TreeNode) -> List[List[int]]:
     helper(root, 0)
     return result
 ```
+
+There are a few different types of trees with important properties. 
+
+### Binary Tree
+
+Source: https://www.javatpoint.com/binary-tree
+
+This is a type of tree where EVERY parent node has a maximum of two child nodes (i.e. binary meaning 2), or leafs.
+
+<img src=https://static.javatpoint.com/ds/images/binary-tree.png>
+
+A **balanced** binary tree is one in which the height of the left and right subtrees of any node differ by not more than 1. Example:
+
+<img src=https://media.geeksforgeeks.org/wp-content/uploads/tree.jpg>
+
+### Binary Search Tree
+
+Source: https://www.tutorialspoint.com/data_structures_algorithms/binary_search_tree.htm
+
+Similar to a Binary Tree, a binary search tree is one in which each node has a maximum of 2 childrens, or leaves, and the left node is `less` than the root and the right node is `greater` than root. Example:
+
+<img src=https://www.upgrad.com/blog/wp-content/uploads/2021/01/800px-Binary_search_tree.svg_-768x640.png>
+
+Here is a code snippet to determine if a binary tree is balaned:
+
+```python
+def isBalanced(self, root: Optional[TreeNode]) -> bool:
+        
+    if not root:
+        return True
+    
+    def helper(root, level):
+        if not root:
+            return 0
+        left = helper(root.left, level+1)
+        right = helper(root.right, level+1)
+        if right == -1 or right == -1:
+            return -1
+        # We have an uneven tree
+        if abs(left - right) > 1:
+            return -1
+        return 1 + max(left, right)
+        
+    valid = helper(root, 0)
+    if valid == -1:
+        return False
+    else:
+        return True
+```
+
+### AVL Tree
 
 ## Graphs
 

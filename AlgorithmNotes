@@ -1,10 +1,101 @@
 # Algorithm Notes
 
+<a href=#bit-manipulation>Bit Manipulation</a>
+
+<a href=#math>Math</a>
+
+<a href=#dynamic-programming>Dynamic programming</a>
+
+<a href=#sorting-and-searching>Sorting and searching</a>
+
 ## Bit Manipulation
 
-## Math & Logic
+In python an example of bit manipulation we can perform in the following:
 
-## Recursion & Dynamic Programming
+`Given two binary strings a and b, return their sum as a binary string.`
+
+```
+Example 1:
+
+Input: a = "11", b = "1"
+Output: "100"
+```
+
+A pythonic solution for this would be the following:
+
+```python
+def addBinary(self, a: str, b: str) -> str:
+        return bin(int(a, 2) + int(b, 2))[2:]
+```
+
+`bin`: Returns the string binary representation of an integer (i.e. 0b111) in this case we want to remove the first 2 characters '0b'
+
+`int(var, 2)`: Creates an integer representation of the string in base 2 (i.e. binary representation)
+
+## Math
+
+## Dynamic Programming
+
+good source: https://www.codesdope.com/course/algorithms-dynamic-programming/
+
+Dynamic programming is a way to break down problems into subproblems in order to solve a large problem. While not the only way to do so, these problems are usually solved via recursion. 
+
+A common problem that is usually optimized with dynamic programming is fibonacci calculations. For example, here's the base fibonnaci program:
+
+```python
+def fibonacci(n):
+  if (n == 0):
+    return 0
+
+  if (n == 1):
+    return 1
+
+  return fibonacci(n-1) + fibonacci(n-2)
+```
+
+However this can be optimized so that never caculate the same values more than once.
+
+For dynamic programming, there are 2 common ways to solve problems, namely <a href=#top-down>top down</a> and <a href=#bottom-up>bottom up</a> (1 small caveat is that bottom up is NOT lways the most optimal choice, and sometimes it's better to use top down):
+
+### Top down
+
+Top down is usually the recursive approach to a dynamic programming problem, and utilizes `memoization` to minimize the number of operations being performed by keeping track of the results. Memoization is typically implemented using recursion and is well-suited for problems that have a relatively small set of inputs.
+
+The top down approach for the fibonacci sequence would look like the following:
+
+```python
+F = [-1]*50 #array to store fibonacci terms
+
+def dynamic_fibonacci(n):
+  if (F[n] < 0):
+    if (n==0):
+      F[n] = 0
+    elif (n == 1):
+      F[n] = 1
+    else:
+      F[n] = dynamic_fibonacci(n-1) + dynamic_fibonacci(n-2)
+  return F[n]
+```
+
+this occurs in a "top-down" manner since we are calculating the value at each subproblem along the way
+
+### Bottom up
+
+Bottom up is the reverse of the top down approach, meaning it is performed in an iterative manner  and utilizes `tabulation` to minimize the number of operations being performed by keeping track of the results. Tabulation is typically implemented using iteration and is well-suited for problems that have a large set of inputs
+
+The top down approach for the fibonacci sequence would look like the following:
+
+```python
+F = [0]*50 #array to store fibonacci terms
+
+def fibonacci_bottom_up(n):
+  F[n] = 0
+  F[1] = 1
+
+  for i in range(2, n+1):
+    F[i] = F[i-1] + F[i-2]
+  return F[n]
+```
 
 ## Sorting & Searching
 

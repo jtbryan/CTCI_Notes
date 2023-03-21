@@ -1,10 +1,18 @@
 # Interview Coding Notes
 
+<a href=#sliding-window>Sliding Window</a>
+
+<a href=#two-pointers>Two Pointers</a>
+
+<a href=#fast-and-slow-pointers>Fast and slow pointers</a>
+
+<a href=#common-patterns>Common Patterns</a>
+
 ## Common Patterns
 ### Sources:
 * https://hackernoon.com/14-patterns-to-ace-any-coding-interview-question-c5bb3357f6ed
 
-### **Sliding Window** (arrays)
+### **Sliding Window**
 <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--os4Lz5eD--/c_imagga_scale,f_auto,fl_progressive,h_500,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/h3h2h4s11pjgla88pqzp.png">
 
 * **Description**: This is a pattern used to perform an operation on a window of an array or linked list given a size.
@@ -15,7 +23,7 @@
 
 
 
-### **Two Pointers** (arrays)
+### **Two Pointers**
 <img src="https://hackernoon.com/images/G9YRlqC9joZNTWsi1ul7tRkO6tv1-x4da3w5y.jpg">
 
 * **Description**: This is a pattern where two pointers iterate through the data structure in tandem until one or both hit a certain condition. This design is often 
@@ -26,7 +34,23 @@
         * Triplets that sum to zero
         * Comparing strings that contain backspaces
 
-### **Fast and Slow pointers** (arrays)
+* **Example**: The following is an example of how we can use the tortoise and hare to find the middle of a linked list:
+
+```python
+def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+    if head is None:
+        return
+
+    p1 = head
+    p2 = head
+    while p2 and p2.next:
+        p1 = p1.next
+        p2 = p2.next.next
+    
+    return p1
+```
+
+### **Fast and Slow pointers**
 <img src="https://media.licdn.com/dms/image/C4E12AQGFgaF0ZlO3yA/article-inline_image-shrink_1500_2232/0/1612410843906?e=1683158400&v=beta&t=2XdTy8i6JFNRP4Rkn7KaU0cdBOSdNOGfnUosSddp1N0">
 
 * **Description**: Similar to the two pointer method, the fast and slow pointer method utilizes two pointers, also known as the Hare & Tortoise Algorithm. This approach is ideal when looking for a **cyclic** list. 
@@ -50,5 +74,5 @@
     * Intervals intersection
     * Maximum CPU load
 
-### **Cyclic sort** (arrays)
+### **Cyclic sort**
 * **Description**: 
