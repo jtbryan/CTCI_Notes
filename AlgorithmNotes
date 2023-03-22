@@ -38,6 +38,8 @@ def addBinary(self, a: str, b: str) -> str:
 
 good source: https://www.codesdope.com/course/algorithms-dynamic-programming/
 
+Amazing video: https://www.youtube.com/watch?v=oBt53YbR9Kk&t=17700s
+
 Dynamic programming is a way to break down problems into subproblems in order to solve a large problem. While not the only way to do so, these problems are usually solved via recursion. 
 
 A common problem that is usually optimized with dynamic programming is fibonacci calculations. For example, here's the base fibonnaci program:
@@ -64,17 +66,12 @@ Top down is usually the recursive approach to a dynamic programming problem, and
 The top down approach for the fibonacci sequence would look like the following:
 
 ```python
-F = [-1]*50 #array to store fibonacci terms
 
-def dynamic_fibonacci(n):
-  if (F[n] < 0):
-    if (n==0):
-      F[n] = 0
-    elif (n == 1):
-      F[n] = 1
-    else:
-      F[n] = dynamic_fibonacci(n-1) + dynamic_fibonacci(n-2)
-  return F[n]
+def dynamic_fibonacci(n, memo={}):
+  if n  in memo: return memo[n]
+  if n <= 2: return 1
+  memo[n] = dynamic_fibonacci(n-1, memo) + dynamic_fibonacci(n-2, memo)
+  return memo[n]
 ```
 
 this occurs in a "top-down" manner since we are calculating the value at each subproblem along the way

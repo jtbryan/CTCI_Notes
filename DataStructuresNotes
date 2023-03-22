@@ -30,6 +30,66 @@ def plusOne(self, digits: List[int]) -> List[int]:
 
 ## Stacks and Queues
 
+### Stacks
+Stacks are a type of continer that follow the LIFO (Last in First Out) structure. 
+
+Good resource: https://www.fullstack.cafe/blog/stacks-interview-questions
+
+Python stack:
+
+```python
+stack = [1, 2, 3]
+last = stack.pop()
+```
+
+An important type of stack is a `Monotonic stack`, which is like a regular stack, but the distinction is that during the push operation, we check if the monotonic condition breaks. Which essentially means, we check to see if the value being pushed onto the stack is greater than the top of the stack. For example:
+
+```python
+def monotonicStack(nums):
+    n = len(nums)
+    stack = []
+    
+    for i in range(n):
+        while len(stack) > 0 and stack[-1] >= nums[i]:
+            stack.pop()
+        
+        stack.append(nums[i])
+    
+    return stack
+```
+
+Another example of this is for this leetcode problem: https://leetcode.com/problems/next-greater-element-i/description/
+
+```python
+def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+    stack = []
+    next_greater = {}
+    # reverse nums2 so we can see the previous element
+    for num in nums2[::-1]:
+        while stack and stack[-1] <= num:
+            stack.pop()
+        next_greater[num] = stack[-1] if stack else -1
+        stack.append(num)
+    return [next_greater[num] for num in nums1]
+```
+
+### Queues
+Queues are a type of continer that follow the FIFO (First in First Out) structure. 
+
+Python queue:
+
+```python
+queue = [1, 2, 3]
+first = queue.pop(0)
+```
+
+OR (faster version):
+
+```python
+queue = collections.deque([1, 2, 3])
+first = queue.popleft()
+```
+
 ## Trees
 
 A tree is a special kind of graph data structure that has a `root` node and a `left` and `right` node. I.e.:
@@ -169,6 +229,65 @@ def isBalanced(self, root: Optional[TreeNode]) -> bool:
     else:
         return True
 ```
+
+### Tries
+
+Tries are a special type of tree that allow us to search for prefixes in words (think autocompletion on google). Building one is quite simple. Here is an example class of a Trie in Python:
+
+```python
+class Trie:
+
+    def __init__(self):
+        self.root = {}
+
+    def insert(self, word: str) -> None:
+        node = self.root
+        for character in word:
+            if character not in node:
+                node[character] = {}
+            node = node[character]
+        node["word"] = True
+
+    def search(self, word: str) -> bool:
+        node = self.root
+        for character in word:
+            if character not in node:
+                return False
+            else:
+                node = node[character]
+        return True if "word" in node else False
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self.root
+        for character in prefix:
+            if character in node:
+                node = node[character]
+            else:
+                return False
+
+        return True
+```
+
+In a Trie, we want to maintain a way to determine if a character is the end of a seen word. For example, if we've populate our trie with a dictionary of words, if the word is not complete, then it is simply a prefix of a word at best. We can do this by simply mapping together letters, and the final letter in the map can have some significance to indicate that it is the end of a word (in our case this is the literal word, 'word').
+
+This could also be accomplished simply with a `TrieNode` datastructure as follows:
+
+```python
+class TrieNode:
+     
+    # Trie node class
+    def __init__(self):
+        self.children = {}
+ 
+        # isEndOfWord is True if node represent the end of the word
+        self.isEndOfWord = False
+```
+
+The time complexity for a Trie is as follows:
+
+Insert: O(N)
+Delete: O(N)
+Search: O(N)
 
 ### AVL Tree
 
