@@ -260,3 +260,91 @@ def findOrder(numCourses, prerequisites):
 ```
 
 The time and space complexity for this algorithm are both O(V+E)
+
+### Dijkstra's 
+
+Dijkstra's allows us to find the shortest path in a graph to a destination. This requires a graph with weighted edges.
+
+An implementation of Dijkstra's may look like the following:
+
+```python
+import heapq
+from collections import defaultdict
+
+def dijkstra(graph, start):
+    # Initialize distances to all vertices as infinity, except start
+    distances = {vertex: float('inf') for vertex in graph}
+    distances[start] = 0
+    
+    # Use a priority queue to keep track of unvisited vertices
+    unvisited = [(0, start)]
+    
+    while unvisited:
+        # Get the vertex with the smallest distance from the start
+        curr_distance, curr_vertex = heapq.heappop(unvisited)
+        
+        # If the current distance to the vertex is greater than the recorded distance,
+        # skip to the next vertex
+        if curr_distance > distances[curr_vertex]:
+            continue
+        
+        # Update distances to neighbors of current vertex
+        for neighbor, weight in graph[curr_vertex].items():
+            distance = curr_distance + weight
+            if distance < distances[neighbor]:
+                distances[neighbor] = distance
+                heapq.heappush(unvisited, (distance, neighbor))
+    
+    return distances
+```
+
+Time complexity: O((V + E) log V)
+Space complexity: O(V)
+
+### A* 
+
+A* is a very similar algorithm to Dijkstra. The primary difference here is that A* uses a heuristic function to determine the distance between a node and the goal. 
+
+This may look like the following:
+
+```python
+import heapq
+
+def A_star(graph, start, goal, heuristic):
+    # Initialize distances to all vertices as infinity, except start
+    distances = {vertex: float('inf') for vertex in graph}
+    distances[start] = 0
+    
+    # Use a priority queue to keep track of unvisited vertices
+    unvisited = [(0, start)]
+    
+    while unvisited:
+        # Get the vertex with the smallest distance from the start
+        curr_distance, curr_vertex = heapq.heappop(unvisited)
+        
+        # If the current distance to the vertex is greater than the recorded distance,
+        # skip to the next vertex
+        if curr_distance > distances[curr_vertex]:
+            continue
+        
+        # If we have reached the goal, return the distances
+        if curr_vertex == goal:
+            return distances
+        
+        # Update distances to neighbors of current vertex
+        for neighbor, weight in graph[curr_vertex].items():
+            distance = curr_distance + weight
+            # Calculate the heuristic value for the neighbor
+            h = heuristic(neighbor, goal)
+            # Add the heuristic value to the distance to get the total estimated distance
+            total_distance = distance + h
+            if total_distance < distances[neighbor]:
+                distances[neighbor] = total_distance
+                heapq.heappush(unvisited, (total_distance, neighbor))
+    
+    # If we have exhausted all possible paths and haven't found the goal, return None
+    return None
+```
+
+Time complexity: O((V + E) log V) (can be improved if the heuristic function is good)
+Space complexity: O(V)
