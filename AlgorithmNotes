@@ -210,3 +210,53 @@ def kthSmallest(arr, l, r, k):
                             k - index + l - 1)
     print("Index out of bound")
 ```
+
+### Topological Sort
+
+Good source: https://www.interviewcake.com/concept/java/topological-sort
+
+The topological sort algorithm takes a directed graph and returns an array of the nodes where each node appears before all the nodes it points to.
+Here is a visual example:
+
+Directed Graph:
+
+<img src="https://www.interviewcake.com/images/svgs/messy_graph.svg?bust=210">
+
+Topological sort of the graph:
+
+<img src="https://www.interviewcake.com/images/svgs/topologically_sorted_graph.svg?bust=210">
+
+Topological sorts, however, don't work for cyclic graphs. This is because, our first nod ecannot have any incoming directed edges. It MUST have an `indegree` of zero. 
+
+Here is an example of a topological sort in Python using BFS for the <a href=https://leetcode.com/problems/course-schedule-ii/description/>Course Schedule II</a> leetcode problem:
+
+```python
+def findOrder(numCourses, prerequisites):
+    # create graph and indegree map
+    graph = defaultdict(list)
+    indegrees = [0] * numCourses
+    for a, b in prerequisites:
+        graph[b].append(a)
+        indegrees[a] += 1
+
+    # perform topological sort using BFS
+    # Initialize our queue with the node that has 0 incoming directed edges
+    # If there is no node in queue at this point, we have a cyclic graph
+    queue = deque([i for i in range(numCourses) if indegrees[i] == 0])
+    order = []
+    while queue:
+        node = queue.popleft()
+        order.append(node)
+        for neighbor in graph[node]:
+            indegrees[neighbor] -= 1
+            if indegrees[neighbor] == 0:
+                queue.append(neighbor)
+
+    # check if all courses were taken
+    if len(order) != numCourses:
+        return []
+
+    return order
+```
+
+The time and space complexity for this algorithm are both O(V+E)

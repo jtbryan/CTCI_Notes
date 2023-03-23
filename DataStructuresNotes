@@ -311,6 +311,9 @@ A graph data structure **(V, E)** consists of the following:
 Fundamental algorithms for graphs include the following:
 
 ### **BFS**
+
+Good source: https://www.techiedelight.com/breadth-first-search/
+
 This is a graph traversal algorithm that traverses the graph from the nearest node (root node) and explores all unexplored (neighboring) nodes by level. You can consider any node in the graph as a root node when using BFS for traversal
 
 An example of how we can go level by level:
@@ -367,6 +370,9 @@ bfs(graph, 0)
 ```
 
 ### **DFS**
+
+Good source: https://www.techiedelight.com/depth-first-search/
+
 The depth-first search algorithm starts the traversal from the initial node of a given graph and goes deeper until we find the target node or the leaf node (with no children). DFS then backtracks from the leaf node towards the most recent node to explore it.
 
 This specific algorithm uses the **Stack** data structure to find the shortest path in a given graph. 
