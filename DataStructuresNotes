@@ -313,13 +313,33 @@ Fundamental algorithms for graphs include the following:
 ### **BFS**
 This is a graph traversal algorithm that traverses the graph from the nearest node (root node) and explores all unexplored (neighboring) nodes by level. You can consider any node in the graph as a root node when using BFS for traversal
 
+An example of how we can go level by level:
+
+```python
+    def bfs(root):
+    if not root:
+        return []
+    queue = [(root, 0)]
+    result = []
+    while queue:
+        node, level = queue.pop(0)
+        if len(result) == level:
+            result.append([])
+        result[level].append(node.val)
+        if node.left:
+            queue.append((node.left, level + 1))
+        if node.right:
+            queue.append((node.right, level + 1))
+    return result
+```
+
 Every vertex of a graph is put into the following categories:
 * Visited
 * Non-visited
 
 This specific algorithm uses the **Queue** data structure to find the shortest path in a given graph. 
 
-Below is an example of how BFS is performed:
+Below is an example of how normal BFS is performed:
 
 ```python
 def bfs(graph, root):
@@ -477,6 +497,14 @@ mapping = map(lambda x: x + x, numbers)
 Heaps are very similar to trees.
 There are 2 forms for heaps, `min heap` and `max heap`
 
+Common functions include:
+
+* `heapq.heappush(heap, x)` push a new value onto a created heap
+* `heapq.heapop(heap)` pop a vlaue off of the heap
+* `heapq.heapify(list)` transform a list into a heap in O(n) time
+* `heapq.nlargest(n, list)` return a list with n largest elements from the dataset (similar to calling heapify) 
+* `heapq.nsmallest(n, list)` return a list with n smallest elements from the dataset (similar to calling heapify) 
+
 ### Min Heap
 
 The top of the "tree" is always the minimum value in the heap. When the top element is removed (i.e. the minimum element), the last element added is moved to the top and appropriately shifted down the tree, swapping places with values along the way to replace the minimum.  As such, every single parent node including the root node is less than or equal to the value of it's children nodes. 
@@ -489,6 +517,31 @@ listForTree = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 heapq.heapify(listForTree) # initialize a min heap
 
 heapq.heappop(listForTree) # pop off the min
+```
+
+We can also do this for dictionaries:
+
+```python
+# import modules
+import heapq as hq
+ 
+# dictionary to be heapified
+dict_1 = {11: 121, 2: 4, 5: 25, 3: 9}
+ 
+# convert dictionary to list of tuples
+di = list(dict_1.items())
+ 
+print("dictionary into list :", di)
+ 
+# converting into heap
+hq.heapify(di)
+ 
+print("Heapified list of tuples :", di)
+ 
+# converting heap to dictionary
+di = dict(di)
+ 
+print("Dictionary as heap :", di)
 ```
 
 ### Max Heap
