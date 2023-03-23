@@ -232,6 +232,8 @@ def isBalanced(self, root: Optional[TreeNode]) -> bool:
 
 ### Tries
 
+Good video: https://www.youtube.com/watch?v=kMt9Y5fv4Ug
+
 Tries are a special type of tree that allow us to search for prefixes in words (think autocompletion on google). Building one is quite simple. Here is an example class of a Trie in Python:
 
 ```python
@@ -285,9 +287,18 @@ class TrieNode:
 
 The time complexity for a Trie is as follows:
 
-Insert: O(N)
-Delete: O(N)
-Search: O(N)
+* Insert: 
+    * Best: O(1) 
+    * Average: O(N)
+    * Worst: O(N)
+* Delete: 
+    * Best: O(1) 
+    * Average: O(N)
+    * Worst: O(N)
+* Search: 
+    * Best: O(1) 
+    * Average: O(N)
+    * Worst: O(N)
 
 ### AVL Tree
 
@@ -463,3 +474,53 @@ mapping = map(lambda x: x + x, numbers)
 ```
 ## Heaps
 
+Heaps are very similar to trees.
+There are 2 forms for heaps, `min heap` and `max heap`
+
+### Min Heap
+
+The top of the "tree" is always the minimum value in the heap. When the top element is removed (i.e. the minimum element), the last element added is moved to the top and appropriately shifted down the tree, swapping places with values along the way to replace the minimum.  As such, every single parent node including the root node is less than or equal to the value of it's children nodes. 
+
+Here is a basic implementation of a min heap in Python:
+
+```python
+import heapq
+listForTree = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]    
+heapq.heapify(listForTree) # initialize a min heap
+
+heapq.heappop(listForTree) # pop off the min
+```
+
+### Max Heap
+
+The top of the "tree" is always the maximum value in the heap. When the top element is removed (i.e. the maximum element), the last element added is moved to the top and appropriately shifted down the tree, swapping places with values along the way to replace the maximum.  As such, every single parent node including the root node is greater than or equal to the value of it's children nodes. 
+
+Here is a basic implementation of a max heap in Python:
+
+```python
+import heapq
+listForTree = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]  
+
+listForTree = [-i for i in listForTree] # set all values to negative
+
+heapq.heapify(listForTree) # initialize a min heap
+
+heapq.heappop(listForTree) # pop off the min
+```
+
+### Priority Queues
+
+The difference between a priority queue and heapq is that `heapq` is NOT thread safe, while priority queue is. 
+
+The PriorityQueue module in python actually utilizes the heapq module. Here is how we could use it though:
+
+```python
+from queue import PriorityQueue
+customers = PriorityQueue() #we initialise the PQ class instead of using a function to operate upon a list. 
+customers.put((2, "Harry"))
+customers.put((3, "Charles"))
+customers.put((1, "Riya"))
+customers.put((4, "Stacy"))
+while customers:
+     print(customers.get())
+```
