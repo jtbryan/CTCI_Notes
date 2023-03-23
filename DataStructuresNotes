@@ -510,6 +510,15 @@ heapq.heappop(listForTree) # pop off the min
 
 ### Priority Queues
 
+Priority queue is a special data structure that is similar to a normal queue, but entirely. In a normal queue, we follow the FIFO traversal. In a priority queue, we assign a priority level to each entry, and pop values off accordingly. (e.g. if we have `{'Bob': 2, 'Alice': 1}` we will get Alice first).
+
+Some of the most common uses for this type of data structure include the following:
+
+* Dijkstra's algorithm
+* Implementing stack
+* For load balancing and interrupt handling in an operating system
+* For data compression in Huffman code
+
 The difference between a priority queue and heapq is that `heapq` is NOT thread safe, while priority queue is. 
 
 The PriorityQueue module in python actually utilizes the heapq module. Here is how we could use it though:
@@ -523,4 +532,73 @@ customers.put((1, "Riya"))
 customers.put((4, "Stacy"))
 while customers:
      print(customers.get())
+```
+
+This method has the following time complexities:
+
+* Peek: O(1)
+* Insert: O(n)
+* Delete: O(1)
+
+This is what an original implementation in Python would look like:
+
+```python
+# Function to heapify the tree
+def heapify(arr, n, i):
+    # Find the largest among root, left child and right child
+    largest = i
+    l = 2 * i + 1
+    r = 2 * i + 2
+
+    if l < n and arr[i] < arr[l]:
+        largest = l
+
+    if r < n and arr[largest] < arr[r]:
+        largest = r
+
+    # Swap and continue heapifying if root is not largest
+    if largest != i:
+        arr[i], arr[largest] = arr[largest], arr[i]
+        heapify(arr, n, largest)
+
+
+# Function to insert an element into the tree
+def insert(array, newNum):
+    size = len(array)
+    if size == 0:
+        array.append(newNum)
+    else:
+        array.append(newNum)
+        for i in range((size // 2) - 1, -1, -1):
+            heapify(array, size, i)
+
+
+# Function to delete an element from the tree
+def deleteNode(array, num):
+    size = len(array)
+    i = 0
+    for i in range(0, size):
+        if num == array[i]:
+            break
+
+    array[i], array[size - 1] = array[size - 1], array[i]
+
+    array.remove(size - 1)
+
+    for i in range((len(array) // 2) - 1, -1, -1):
+        heapify(array, len(array), i)
+
+
+arr = []
+
+insert(arr, 3)
+insert(arr, 4)
+insert(arr, 9)
+insert(arr, 5)
+insert(arr, 2)
+
+print ("Max-Heap array: " + str(arr))
+
+deleteNode(arr, 4)
+print("After deleting an element: " + str(arr))
 ```
