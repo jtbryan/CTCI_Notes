@@ -74,5 +74,56 @@ def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
     * Intervals intersection
     * Maximum CPU load
 
+A great example for this problem can be found in this leetcode problem: https://leetcode.com/problems/insert-interval/
+
+A simple solution for finding and merging overlappign intervals, can be seen in the following code snippet:
+
+```python
+def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    left = []
+    right = []
+    overlap = []
+    for interval in intervals:
+        if interval[1] < newInterval[0]:
+            left.append(interval)
+        elif interval[0] > newInterval[1]:
+            right.append(interval)
+        else:
+            overlap.append(interval)
+
+    # Loop through the overlapping intervals and determine the minimum and maximum 
+    for interval in overlap:
+        newInterval[0] = min(newInterval[0], interval[0])
+        newInterval[1] = max(newInterval[1], interval[1])
+    return left + [newInterval] + right
+```
+
+The time and space complexity for this algorithm are both `O(n)`
+
+To improve this, since the provide array is `sorted` by the start time, we can use a binary search algorithm to improve our time complexity to `O(logn)` while still maintaining a space complexity of `O(n)`. This implementation would look liek the following:
+
+```python
+def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+    n = len(intervals)
+    if n == 0:
+        return [newInterval]
+    if newInterval[1] < intervals[0][0]:
+        return [newInterval] + intervals
+    if newInterval[0] > intervals[-1][1]:
+        return intervals + [newInterval]
+    l, r = 0, n-1
+    while l < r:
+        mid = (l + r) // 2
+        if intervals[mid][1] < newInterval[0]:
+            l = mid + 1
+        else:
+            r = mid
+    i = l
+    while i < n and newInterval[1] >= intervals[i][0]:
+        newInterval = [min(newInterval[0], intervals[i][0]), max(newInterval[1], intervals[i][1])]
+        i += 1
+    return intervals[:l] + [newInterval] + intervals[i:]
+```
+
 ### **Cyclic sort**
 * **Description**: 
